@@ -48,7 +48,8 @@ class ResNet18Trainer:
             self.optimizer,
             mode='max',
             factor=0.1,
-            patience=7
+            patience=7,
+            min_lr=1e-6
         )
         self.best_acc = 0.0
 
