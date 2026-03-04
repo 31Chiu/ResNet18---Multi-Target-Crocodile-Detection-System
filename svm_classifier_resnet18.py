@@ -76,13 +76,15 @@ class SVMHybridTrainer:
         # Rebuild the model structure and load the saved weights
         model = resnet18()
         num_features = model.fc.in_features
-        # The model structure here must be exactly the same as the one used during training.
-        # We use nn.Sequential to ensure this.
-        model.fc = nn.Sequential(
-            # Even if it is not used in evaluation, it is structurally required to match the weights
-            nn.Dropout(0.5),
-            nn.Linear(num_features, len(checkpoint['classes']))
-        )
+        # # The model structure here must be exactly the same as the one used during training.
+        # # We use nn.Sequential to ensure this.
+        # model.fc = nn.Sequential(
+        #     # Even if it is not used in evaluation, it is structurally required to match the weights
+        #     nn.Dropout(0.5),
+        #     nn.Linear(num_features, len(checkpoint['classes']))
+        # )
+        # Structure that perfectly matches the training time
+        model.fc = nn.Linear(num_features, len(checkpoint['classes']))
         model.load_state_dict(checkpoint['model_state_dict'])
 
         # We snip off the final layer

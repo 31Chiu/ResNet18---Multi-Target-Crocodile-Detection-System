@@ -35,11 +35,13 @@ def load_pretrained_resnet18(model_path='best_resnet18_model.pth', num_classes=1
 
     # Get the number of input features for the classifier
     num_ftrs = model.fc.in_features
-    # The Sequential structure here needs to match your training script
-    model.fc = nn.Sequential(
-        nn.Dropout(0.5),
-        nn.Linear(num_ftrs, num_classes)
-    )
+    # # The Sequential structure here needs to match your training script
+    # model.fc = nn.Sequential(
+    #     nn.Dropout(0.5),
+    #     nn.Linear(num_ftrs, num_classes)
+    # )
+    # Structure that perfectly matches the training time
+    model.fc = nn.Linear(num_ftrs, num_classes)
 
     # Load the entire saved file, which is a dictionary (checkpoint) containing various places of data.
     checkpoint = torch.load(model_path, map_location=get_device())
