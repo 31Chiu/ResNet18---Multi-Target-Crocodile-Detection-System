@@ -59,7 +59,8 @@ class ResNet18Trainer:
 
         # Aggressive Data Augmentation
         train_transform = transforms.Compose([
-            transforms.RandomResizedCrop(224),
+            # transforms.RandomResizedCrop(224),
+            transforms.RandomResizedCrop(640),
             transforms.RandomHorizontalFlip(),
             transforms.RandomRotation(30), 
             transforms.RandomAffine(degrees=0, translate=(0.1, 0.1), scale=(0.9, 1.1), shear=10),
@@ -70,8 +71,10 @@ class ResNet18Trainer:
         ])
 
         val_transform = transforms.Compose([
-            transforms.Resize(256),
-            transforms.CenterCrop(224),
+            # transforms.Resize(256),
+            # transforms.CenterCrop(224),
+            transforms.Resize(680),
+            transforms.CenterCrop(640),
             transforms.ToTensor(),
             transforms.Normalize(mean, std)
         ])

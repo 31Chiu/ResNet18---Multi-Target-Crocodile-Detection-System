@@ -34,8 +34,10 @@ class SVMHybridTrainer:
     def _load_data(self, train_dir, val_dir):
         mean, std = [0.485, 0.456, 0.406], [0.229, 0.224, 0.225]
         transform = transforms.Compose([
-            transforms.Resize(256),
-            transforms.CenterCrop(224),
+            # transforms.Resize(256),
+            # transforms.CenterCrop(224),
+            transforms.Resize(680),
+            transforms.CenterCrop(640),
             transforms.ToTensor(),
             transforms.Normalize(mean, std)
         ])
@@ -47,16 +49,20 @@ class SVMHybridTrainer:
             train_dataset, 
             batch_size=self.batch_size, 
             shuffle=False, 
-            num_workers=4, 
-            pin_memory=True
+            # num_workers=4, 
+            # pin_memory=True
+            num_workers=0, 
+            pin_memory=False
         )
 
         val_loader = torch.utils.data.DataLoader(
             val_dataset, 
             batch_size=self.batch_size, 
             shuffle=False, 
-            num_workers=4, 
-            pin_memory=True
+            # num_workers=4, 
+            # pin_memory=True
+            num_workers=0, 
+            pin_memory=False
         )
 
         return train_loader, val_loader

@@ -110,7 +110,9 @@ def main():
     # 2. Prepare the dataset
     # Define the same transformations used during training
     transform = transforms.Compose([
-        transforms.Resize((224, 224)),
+        # transforms.Resize((224, 224)),
+        transforms.Resize(680),
+        transforms.CenterCrop(640),
         transforms.ToTensor(),
         transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
     ])
@@ -124,8 +126,8 @@ def main():
 
     # Create DataLoaders
     # Adjust batch_size based on your hardware's capability
-    train_loader = DataLoader(train_dataset, batch_size=32, shuffle=False)
-    test_loader = DataLoader(test_dataset, batch_size=32, shuffle=False)
+    train_loader = DataLoader(train_dataset, batch_size=32, shuffle=False, num_workers=0, pin_memory=False)
+    test_loader = DataLoader(test_dataset, batch_size=32, shuffle=False, num_workers=0, pin_memory=False)
 
     # 3. Extract features
     print("Extracting features from the training set...")
