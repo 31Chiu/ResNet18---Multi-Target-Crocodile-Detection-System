@@ -244,7 +244,7 @@
 2026-03-04 22:00:31,358 - INFO - Training complete. Best validation accuracy:  0.9863
 
 
-MOdify 224x224 to 640x640 Starting Here
+Modify 224x224 to 640x640 Starting Here
 2026-03-31 23:32:44,280 - INFO - Number of classes: 2
 2026-03-31 23:32:44,280 - INFO - Class names: ['crocodile', 'non-crocodile']
 2026-03-31 23:32:44,491 - INFO - Starting training on device: cuda
